@@ -9,9 +9,10 @@ import { useRouter } from 'next/navigation';
 const UserProfile = () => {
   const router = useRouter();
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  
+
   const handleLogout = () => {
     localStorage.removeItem('user');
+    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     router.push('/login');
   };
 

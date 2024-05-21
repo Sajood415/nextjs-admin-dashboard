@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { login } from '@/actions/auth/login';
+import { toast } from 'sonner';
 
 const UserLoginForm = () => {
   const [username, setUsername] = useState('');
@@ -15,11 +16,13 @@ const UserLoginForm = () => {
     e.preventDefault();
     try {
       const response = await login(username, password);
-      console.log('Login successful:', response);
       document.cookie = `token=${response.token}; path=/`;
       localStorage.setItem('user', JSON.stringify(response));
+      console.log('Login Successful:', response);
+      toast.success("Login Successful", {duration: 2000});
       router.push('/products');
     } catch (error) {
+      toast.error("Login Failed", {duration: 2000});
       console.error('Login failed:', error);
     }
   };
