@@ -1,4 +1,6 @@
-import { API_BASE_URL } from './config';
+'use server';
+
+import { API_BASE_URL } from '../config';
 
 export interface LoginResponse {
   id: number;
@@ -11,7 +13,7 @@ export interface LoginResponse {
   token: string;
 }
 
-export const login = async (username: string, password: string): Promise<LoginResponse> => {
+export async function login(username: string, password: string): Promise<LoginResponse> {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -30,4 +32,4 @@ export const login = async (username: string, password: string): Promise<LoginRe
 
   const data = await response.json();
   return data;
-};
+}

@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, toggleSidebar }) => {
 
   const handleClickOutside = (event: MouseEvent) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-      setTimeout(toggleSidebar, 100); 
+      setTimeout(toggleSidebar, 100);
     }
   };
 
@@ -56,15 +56,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, toggleSidebar }) => {
       <div className="flex justify-center items-center mb-4">
         <Image src="https://via.placeholder.com/50" width={50} height={50} alt="Placeholder" />
       </div>
-      <nav className="space-y-6"> 
-        {MenuItems.map((item) => (
+      <nav>
+        {MenuItems.map((item, index) => (
           <Link href={item.href} key={item.title}>
             <div
               className={`w-full flex items-center space-x-2 py-2 px-2 rounded-lg transition-colors ${
                 pathname === item.href
-                  ? 'bg-gray-700 text-white'
-                  : 'hover:bg-gray-700 text-gray-300'
-              }`}
+                  ? "bg-gray-700 text-white"
+                  : "hover:bg-gray-700 text-gray-300"
+              } ${index > 0 ? "mt-3" : ""}`}
               onClick={toggleSidebar}
             >
               <div className="text-2xl">{item.icon}</div>
@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, toggleSidebar }) => {
             </div>
           </Link>
         ))}
-      </nav>
+        </nav>
     </aside>
   );
 };
