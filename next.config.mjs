@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+const nextConfig = {
+    experimental: {
+      appDir: true,
+    },
+    images: {
+        domains: ["via.placeholder.com", "robohash.org"],
+      },    
+  };
+  
+  export default nextConfig;
+  
