@@ -69,7 +69,7 @@ const DashboardData: React.FC = () => {
         <Card title="Total Products" value={Object.values(categoriesCount).reduce((acc, count) => acc + count, 0)} />
         <Card title="Categories" value={Object.keys(categoriesCount).length} />
       </div>
-      <div className="w-full bg-white border border-gray-300 rounded-lg shadow-lg p-4 overflow-x-auto">
+      <div className="w-full bg-white border border-gray-300 rounded-lg shadow-lg p-4 overflow-x-auto mb-12">
         <div className="w-full h-96">
           <canvas ref={chartRef}></canvas>
         </div>

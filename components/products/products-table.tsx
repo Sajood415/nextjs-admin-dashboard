@@ -26,19 +26,19 @@ const ProductsTable: React.FC = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    setSearchValue(''); // Reset search value when page changes
-    setSelectedCategory('all'); // Reset category filter when page changes
-    setSelectedBrand('all'); // Reset brand filter when page changes
+    setSearchValue(''); 
+    setSelectedCategory('all'); 
+    setSelectedBrand('all');
   };
 
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
-    setCurrentPage(1); // Reset to the first page when filter changes
+    setCurrentPage(1); 
   };
 
   const handleBrandChange = (value: string) => {
     setSelectedBrand(value);
-    setCurrentPage(1); // Reset to the first page when filter changes
+    setCurrentPage(1); 
   };
 
   const filteredProducts = products.filter((product) => {
@@ -49,7 +49,7 @@ const ProductsTable: React.FC = () => {
   });
 
   return (
-    <div className="w-full p-4 border rounded-lg shadow-lg bg-white mb-10 h-full flex flex-col justify-between">
+    <div className="w-full p-4 border rounded-lg shadow-lg bg-white mb-10 h-full flex flex-col justify-between mb-12">
       <TableFilter
         searchValue={searchValue}
         onSearchChange={setSearchValue}
