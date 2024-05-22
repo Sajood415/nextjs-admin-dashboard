@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Product, getProducts } from '@/actions/products/get-products';
 
 interface ProductsContextType {
@@ -17,7 +17,7 @@ export const ProductsProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchProducts = useCallback(async (skip: number, limit: number) => {
+  const fetchProducts = async (skip: number, limit: number) => {
     setLoading(true);
     try {
       const data = await getProducts(skip, limit);
@@ -28,7 +28,7 @@ export const ProductsProvider: React.FC<{ children: ReactNode }> = ({ children }
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
   return (
     <ProductsContext.Provider value={{ products, total, loading, fetchProducts }}>

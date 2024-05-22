@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useProducts } from '@/context/products/products-context-provider';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import TablePagination from '@/components/products/table-pagination';
@@ -17,28 +17,29 @@ const ProductsTable: React.FC = () => {
   const itemsPerPage = 10;
   const totalPages = Math.ceil(total / itemsPerPage);
 
-  const categories = Array.from(new Set(products.map((product) => product.category)));
-  const brands = Array.from(new Set(products.map((product) => product.brand)));
+  const fetchProductsRef = useRef(fetchProducts);
 
   useEffect(() => {
-    fetchProducts((currentPage - 1) * itemsPerPage, itemsPerPage);
-  }, [fetchProducts, currentPage]);
+    fetchProductsRef.current = fetchProducts;
+  }, [fetchProducts]);
+
+  useEffect(() => {
+    fetchProductsRef.current((currentPage - 1) * itemsPerPage, itemsPerPage);
+  }, [currentPage]);
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
     setSearchValue(''); 
     setSelectedCategory('all'); 
     setSelectedBrand('all');
+    setCurrentPage(page);
   };
 
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
-    setCurrentPage(1); 
   };
 
   const handleBrandChange = (value: string) => {
     setSelectedBrand(value);
-    setCurrentPage(1); 
   };
 
   const filteredProducts = products.filter((product) => {
@@ -49,14 +50,14 @@ const ProductsTable: React.FC = () => {
   });
 
   return (
-    <div className="w-full p-4 border rounded-lg shadow-lg bg-white mb-10 h-full flex flex-col justify-between mb-12">
+    <div className="w-full p-4 border rounded-lg shadow-lg bg-white h-full flex flex-col justify-between mb-12">
       <TableFilter
         searchValue={searchValue}
         onSearchChange={setSearchValue}
-        categories={categories}
+        categories={Array.from(new Set(products.map((product) => product.category)))}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
-        brands={brands}
+        brands={Array.from(new Set(products.map((product) => product.brand)))}
         selectedBrand={selectedBrand}
         onBrandChange={handleBrandChange}
       />
