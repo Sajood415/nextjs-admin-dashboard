@@ -16,14 +16,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const handleLogin = async (username: string, password: string) => {
     const response = await login(username, password);
-    document.cookie = `token=${response.token}; path=/`;
-    localStorage.setItem('user', JSON.stringify(response));
+    if (typeof window !== 'undefined') {
+      document.cookie = `token=${response.token}; path=/`;
+      localStorage.setItem('user', JSON.stringify(response));
+    }
     setUser(response);
   };
 
   const handleLogout = () => {
-    document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-    localStorage.removeItem('user');
+    if (typeof window !== 'undefined') {
+      document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      localStorage.removeItem('user');
+    }
     setUser(null);
   };
 

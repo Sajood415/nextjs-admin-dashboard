@@ -4,7 +4,7 @@ const nextConfig = {
       appDir: true,
     },
     images: {
-        domains: ["cdn-icons-png.flaticon.com", "robohash.org", "cdn.dummyjson.com"],
+        domains: ["cdn-icons-png.flaticon.com", "robohash.org", "cdn.dummyjson.com", "via.placeholder.com"],
       },    
   };
   
