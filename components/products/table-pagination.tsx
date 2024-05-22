@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@/components/ui/pagination';
+import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface TablePaginationProps {
   currentPage: number;
@@ -27,9 +29,13 @@ const TablePagination: React.FC<TablePaginationProps> = ({ currentPage, totalPag
   return (
     <Pagination>
       {currentPage > 1 ? (
-        <PaginationPrevious onClick={() => onPageChange(currentPage - 1)} />
+        <Button variant="outline" size="icon" onClick={() => onPageChange(currentPage - 1)}>
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
       ) : (
-        <span className="px-4 py-2 text-gray-400">Previous</span>
+        <Button variant="outline" size="icon" disabled>
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
       )}
       <PaginationContent>
         {getPageNumbers().map(page => (
@@ -45,9 +51,13 @@ const TablePagination: React.FC<TablePaginationProps> = ({ currentPage, totalPag
         ))}
       </PaginationContent>
       {currentPage < totalPages ? (
-        <PaginationNext onClick={() => onPageChange(currentPage + 1)} />
+        <Button variant="outline" size="icon" onClick={() => onPageChange(currentPage + 1)}>
+          <ChevronRight className="h-4 w-4" />
+        </Button>
       ) : (
-        <span className="px-4 py-2 text-gray-400">Next</span>
+        <Button variant="outline" size="icon" disabled>
+          <ChevronRight className="h-4 w-4" />
+        </Button>
       )}
     </Pagination>
   );

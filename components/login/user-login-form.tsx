@@ -6,15 +6,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/context/auth/auth-context-provider';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 const UserLoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await login(username, password);
       toast.success("Login Successful", { duration: 2000 });
@@ -22,6 +25,8 @@ const UserLoginForm = () => {
     } catch (error) {
       toast.error("Login Failed", { duration: 2000 });
       console.error('Login failed:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,8 +69,15 @@ const UserLoginForm = () => {
         </div>
       </div>
       <div>
-        <Button type="submit" className="w-full">
-          Sign in
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </>
+          ) : (
+            'Sign in'
+          )}
         </Button>
       </div>
     </form>
