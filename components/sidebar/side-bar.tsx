@@ -54,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, toggleSidebar }) => {
       } md:relative md:translate-x-0 md:h-screen`}
     >
       <div className="flex justify-center items-center mb-4">
-        <Image src="https://via.placeholder.com/50" width={50} height={50} alt="Placeholder" />
+        <Image src="https://cdn-icons-png.flaticon.com/512/2782/2782728.png" width={100} height={100} alt="Placeholder" />
       </div>
       <nav>
         {MenuItems.map((item, index) => (
