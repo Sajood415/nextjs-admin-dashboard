@@ -55,7 +55,9 @@ const ProductsTable: React.FC = () => {
                 <TableCell className="px-5 py-3 whitespace-nowrap text-sm text-gray-500">{product.brand}</TableCell>
                 <TableCell className="px-5 py-3 whitespace-nowrap text-sm text-gray-500">{product.stock}</TableCell>
                 <TableCell className="px-5 py-3 whitespace-nowrap text-sm text-gray-500">
-                  <Image src={product.thumbnail} alt={product.title} width={50} height={50} className="rounded" />
+                  <div className="w-16 h-16">
+                    <Image src={product.thumbnail} alt={product.title} width={64} height={64} className="rounded object-cover w-full h-full" />
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

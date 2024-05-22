@@ -4,25 +4,23 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { login } from '@/actions/auth/login';
+import { useAuth } from '@/context/auth/auth-context-provider';
 import { toast } from 'sonner';
 
 const UserLoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await login(username, password);
-      document.cookie = `token=${response.token}; path=/`;
-      localStorage.setItem('user', JSON.stringify(response));
-      console.log('Login Successful:', response);
-      toast.success("Login Successful", {duration: 2000});
+      await login(username, password);
+      toast.success("Login Successful", { duration: 2000 });
       router.push('/products');
     } catch (error) {
-      toast.error("Login Failed", {duration: 2000});
+      toast.error("Login Failed", { duration: 2000 });
       console.error('Login failed:', error);
     }
   };
