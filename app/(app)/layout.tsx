@@ -5,6 +5,7 @@ import Sidebar from '@/components/sidebar/side-bar';
 import Navbar from '@/components/navbar/nav-bar';
 import { ProductsProvider } from '@/context/products/products-context-provider';
 import LoaderContent from '@/components/loader/LoaderContent';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <ProductsProvider>
+      <TooltipProvider>
       <div className="flex h-screen overflow-hidden">
         <Sidebar isVisible={isSidebarVisible} toggleSidebar={toggleSidebar} />
         <div className="flex-1 flex flex-col h-full overflow-hidden">
@@ -28,6 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </div>
       </div>
+      </TooltipProvider>
     </ProductsProvider>
   );
 };
