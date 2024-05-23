@@ -19,8 +19,8 @@ export default function LoginPage() {
             <UserLoginForm />
             <div className='flex flex-col space-y-2 text-center'>
 							<p className='text-sm text-muted-foreground'>
-								user name: atuny0 <br/>
-								pass: 9uQFF1Lh
+								user name: emilys <br/>
+								pass: emilyspass
 							</p>
 						</div>
           </div>
