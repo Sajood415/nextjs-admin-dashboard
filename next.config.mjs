@@ -5,17 +5,18 @@ const nextConfig = {
   },
   images: {
     domains: [
-      "cdn-icons-png.flaticon.com", 
-      "robohash.org", 
-      "cdn.dummyjson.com", 
-      "via.placeholder.com"
+      "cdn-icons-png.flaticon.com",
+      "robohash.org",
+      "cdn.dummyjson.com",
+      "via.placeholder.com",
+      "dummyjson.com",
     ],
   },
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/login',
+        source: "/",
+        destination: "/login",
         permanent: false,
       },
     ];
